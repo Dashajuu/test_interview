@@ -1,0 +1,31 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block content %}
+<h1>Word Counter</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ upload_form.as_p }}
+        <button type="submit" name="upload_file">Upload File</button>
+    </form>
+
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ word_form.as_p }}
+        <button type="submit" name="word_count">Count Word</button>
+    </form>
+
+    {% if count %}
+    <p>Occurrences of '{{ word_form.word.value }}': {{ count }}</p>
+    {% endif %}
+
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="clear_memory">Clear Memory</button>
+    </form>
+{% endblock content %}
